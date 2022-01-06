@@ -112,12 +112,12 @@ async def pause_cmd(_, message):
     checking = message.from_user.mention
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
-        return await message.reply_text("🌀 Gada yang muter lagu {checking} kontol")
+        return await message.reply_text("**Gada yang muter lagu kontol**")
     elif not await is_music_playing(message.chat.id):
-        return await message.reply_text("🌀 Gada yang muter lagu {checking} kontol")   
+        return await message.reply_text("**Gada yang muter lagu kontol**")   
     await music_off(chat_id)
     await music.pytgcalls.pause_stream(chat_id)
-    await message.reply_text(f"🎧 Kenapa kau pause {checking}!kontol")
+    await message.reply_text(f"**🎧 Kenapa kau pause {checking} kontol**")
     
 @app.on_message(filters.command(["resume", f"resume@{BOT_USERNAME}", "rs"]))
 async def stop_cmd(_, message): 
@@ -130,13 +130,13 @@ async def stop_cmd(_, message):
     checking = message.from_user.mention
     chat_id = message.chat.id
     if not await is_active_chat(chat_id):
-        return await message.reply_text("🌀 Gada yang muter lagu {checking} kontol")
+        return await message.reply_text("**Gada yang muter lagu kontol**")
     elif await is_music_playing(chat_id):
-        return await message.reply_text("🌀 Gada yang muter lagu {checking} kontol") 
+        return await message.reply_text("**Gada yang muter lagu kontol**") 
     else:
         await music_on(chat_id)
         await music.pytgcalls.resume_stream(chat_id)
-        await message.reply_text(f"**🎧 Nah gitu dong {checking}! kontol**")
+        await message.reply_text(f"**🎧 Nah gitu dong {checking} kontol**")
 
 @app.on_message(filters.command(["end", f"end@{BOT_USERNAME}", "e"]))
 async def stop_cmd(_, message): 
@@ -155,9 +155,9 @@ async def stop_cmd(_, message):
             pass                        
         await remove_active_chat(chat_id)
         await music.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text(f"**🎧 Kenapa kau stop {checking}! kontol**") 
+        await message.reply_text(f"**🎧 Kenapa kau stop {checking} kontol**") 
     else:
-        return await message.reply_text("🌀 Gada yang muter lagu {checking} kontol")
+        return await message.reply_text("**Gada yang muter lagu kontol**")
     
 @app.on_message(filters.command(["skip", f"skip@{BOT_USERNAME}", "sk"]))
 async def stop_cmd(_, message): 
@@ -171,7 +171,7 @@ async def stop_cmd(_, message):
     chat_id = message.chat.id
     chat_title = message.chat.title
     if not await is_active_chat(chat_id):
-        await message.reply_text("🌀 Gada yang muter lagu {checking} kontol")
+        await message.reply_text("**Gada yang muter lagu kontol**")
     else:
         task_done(chat_id)
         if is_empty(chat_id):
