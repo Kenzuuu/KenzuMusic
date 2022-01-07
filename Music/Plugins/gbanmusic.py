@@ -3,16 +3,16 @@ import asyncio
 from Music import BOT_ID, OWNER, app
 from Music.MusicUtilities.database.chats import get_served_chats
 from Music.MusicUtilities.database.gbanned import (
-    add_gban_user,
+    add_mban_user,
     is_gbanned_user,
-    remove_gban_user,
+    remove_mban_user,
 )
 from Music.MusicUtilities.database.sudo import get_sudoers
 from pyrogram import filters
 from pyrogram.errors import FloodWait
 
 
-@app.on_message(filters.command("gban") & filters.user(OWNER))
+@app.on_message(filters.command("mban") & filters.user(OWNER))
 async def ban_globally(_, message):
     if not message.reply_to_message:
         if len(message.command) < 2:
@@ -32,7 +32,7 @@ async def ban_globally(_, message):
             await message.reply_text("Anda ingin memblokir pengguna sudo?")
         else:
 
-            await add_gban_user(user.id)
+            await add_mban_user(user.id)
             served_chats = []
             chats = await get_served_chats()
             for chat in chats:
@@ -127,7 +127,7 @@ __**Larangan Global Baru pada Musik**__
             return
 
 
-@app.on_message(filters.command("ungban") & filters.user(OWNER))
+@app.on_message(filters.command("umban") & filters.user(OWNER))
 async def unban_globally(_, message):
     if not message.reply_to_message:
         if len(message.command) != 2:
@@ -150,7 +150,7 @@ async def unban_globally(_, message):
             if not is_gbanned:
                 await message.reply_text("Dia sudah bebas, mengapa menggertaknya?")
             else:
-                await remove_gban_user(user.id)
+                await remove_mban_user(user.id)
                 await message.reply_text(f"Ungbanned!")
         return
     from_user_id = message.from_user.id
@@ -170,7 +170,7 @@ async def unban_globally(_, message):
         if not is_gbanned:
             await message.reply_text("Dia sudah bebas, mengapa menggertaknya?")
         else:
-            await remove_gban_user(user_id)
+            await remove_mban_user(user_id)
             await message.reply_text(f"Ungbanned!")
 
 
